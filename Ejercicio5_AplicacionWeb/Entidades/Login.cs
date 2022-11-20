@@ -2,7 +2,7 @@
 {
     public class Login
     {
-        public string CodUsuario { get; set; }
+        public string Codigo { get; set; }
         public string Clave { get; set; } 
     }
 }

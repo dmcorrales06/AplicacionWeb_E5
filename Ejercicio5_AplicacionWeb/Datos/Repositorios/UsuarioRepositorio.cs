@@ -2,11 +2,6 @@
 using Datos.Interfaces;
 using Entidades;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Datos.Repositorios
 {
@@ -24,7 +19,7 @@ namespace Datos.Repositorios
             return new MySqlConnection(CadenaConexion);
         }
 
-        public async Task<Usuario> GetPorCodigo(string codigo)
+        public async Task<Usuario> GetPorCodigo(string CodUsuario)
         {
             Usuario user = new Usuario();
             try
@@ -32,13 +27,32 @@ namespace Datos.Repositorios
 
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = "SELECT * FROM login WHERE CodUsuario = @CodUsuario;";
-                user = await conexion.QueryFirstAsync<Usuario>(sql, new { codigo});
+                string sql = "SELECT * FROM usuario WHERE CodUsuario = @CodUsuario;";
+                user = await conexion.QueryFirstAsync<Usuario>(sql, new { CodUsuario});
             }
             catch (Exception ex)
             {
             }
             return user;
+        }
+
+        public async Task<IEnumerable<Usuario>> GetLista()
+        {
+            IEnumerable < Usuario > lista = new List<Usuario>();
+            try
+            {
+              
+                using MySqlConnection conexion = Conexion();
+                await conexion.OpenAsync();
+                string sql = "SELECT * FROM usuario;";
+            
+                lista = await conexion.QueryAsync<Usuario>(sql);
+            }
+            catch (Exception ex)
+            {
+            }
+            return lista;
+
         }
     }
 }
