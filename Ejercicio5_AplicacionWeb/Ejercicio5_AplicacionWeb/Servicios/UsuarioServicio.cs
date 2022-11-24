@@ -24,9 +24,9 @@ namespace Ejercicio5_AplicacionWeb.Servicios
 
         }
 
-        public async Task<Usuario> GetPorCodigo(string CodUsuario)
+        public async Task<Usuario> GetPorCodigo(string codigo)
         {
-            return await usuarioRepositorio.GetPorCodigo(CodUsuario);
+            return await usuarioRepositorio.GetPorCodigo(codigo);
         }
     }
 }
